@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public class ARTrackedImg : MonoBehaviour
 {
     public ARTrackedImageManager trackedImageManager;
-
+    public Button removeInfo;
 
     [SerializeField]
-    public GameObject[] placeablePrefabs;
+    private GameObject[] placeablePrefabs;
 
     private Dictionary<string, GameObject> spawnedObjects;
 
@@ -100,7 +100,6 @@ public class ARTrackedImg : MonoBehaviour
 
         if (trackedImage.trackingState == TrackingState.Tracking)
         {
-
             spawnedObjects[referenceImageName].transform.position = trackedImage.transform.position;
             spawnedObjects[referenceImageName].transform.rotation = trackedImage.transform.rotation;
 
@@ -111,5 +110,13 @@ public class ARTrackedImg : MonoBehaviour
             spawnedObjects[referenceImageName].SetActive(false);
         }
 
+        removeInfo.onClick.AddListener(() => removeInfomation(referenceImageName));
+
+    }
+
+    void removeInfomation(string objname)
+    {
+        spawnedObjects[objname].SetActive(false);
+        spawnedObjects[objname] = null;
     }
 }

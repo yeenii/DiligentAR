@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class PassNumber : MonoBehaviour
 {
-    public InputField RealNum;
-    public Text InputNum;
+    public InputField RealNum; //입력한 숫자
+    public Text InputNum; //* 
     Button btn;
+    
 
     // Start is called before the first frame update
 
@@ -34,7 +35,7 @@ public class PassNumber : MonoBehaviour
 
        Debug.Log(RealNum.text);
         Debug.Log(InputNum.text);
-
+        
     }
 
 }
