@@ -1673,7 +1673,7 @@ MonoBehaviour:
   m_SelectionColor: {r: 1, g: 1, b: 1, a: 0.7529412}
   m_Text: 
   m_CaretBlinkRate: 0
-  m_CaretWidth: 4
+  m_CaretWidth: 1
   m_ReadOnly: 0
 --- !u!114 &1054365559
 MonoBehaviour:
@@ -2790,6 +2790,10 @@ PrefabInstance:
     - target: {fileID: 8910576834105467533, guid: f2f0a83bfbbbfb349a5a213968959ae7, type: 3}
       propertyPath: m_Name
       value: DescriptionUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8910576834105467533, guid: f2f0a83bfbbbfb349a5a213968959ae7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2f0a83bfbbbfb349a5a213968959ae7, type: 3}
