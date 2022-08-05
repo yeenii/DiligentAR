@@ -9,6 +9,11 @@ public class ARTrackedImg : MonoBehaviour
 {
     public ARTrackedImageManager trackedImageManager;
     public Button removeInfo;
+    public GameObject defaultUI; //디폴트 UI
+    public GameObject verifiUI; //이중인증 UI
+    public Button verifiBtn; //이중인증 확인 버튼
+
+    private bool verifiChk = false; // 이중인증 체크 변수
 
     [SerializeField]
     private GameObject[] placeablePrefabs;
@@ -20,6 +25,10 @@ public class ARTrackedImg : MonoBehaviour
         trackedImageManager = GetComponent<ARTrackedImageManager>();  //컴포넌트 받아오기
         spawnedObjects = new Dictionary<string, GameObject>();
         string[] CodeName = new string[50];
+
+        defaultUI.SetActive(true); //디폴트 UI 초기 세팅 값 : true 
+        verifiUI.SetActive(false);  //이중인증 UI 초기 세팅 값 : false 
+
         string str1 = "남그린,01012345678,서울시 강서구 마곡2로 38,김가현,01023456789,인천광역시 중구 제로 269,기념티셔츠";
         string str2 = "정예은,01087654321,서울시 마포구 창전로 28-1,성예원,01098765432,경기도 고양시 일산서구 산현로 28,도서";
         string[] DelInfo1 = str1.Split(new char[] { ',' });
@@ -98,12 +107,20 @@ public class ARTrackedImg : MonoBehaviour
     {
         string referenceImageName = trackedImage.referenceImage.name;
 
+        setVerifi();
+
         if (trackedImage.trackingState == TrackingState.Tracking)
         {
-            spawnedObjects[referenceImageName].transform.position = trackedImage.transform.position;
-            spawnedObjects[referenceImageName].transform.rotation = trackedImage.transform.rotation;
+            if (verifiChk) //이중 인증 완료 되었다면 실행
+            {
+                defaultUI.gameObject.SetActive(false);
 
-            spawnedObjects[referenceImageName].SetActive(true);
+                spawnedObjects[referenceImageName].transform.position = trackedImage.transform.position;
+                spawnedObjects[referenceImageName].transform.rotation = trackedImage.transform.rotation;
+
+                spawnedObjects[referenceImageName].SetActive(true);
+            }
+            //else setVerifi(); //이중 인증 완료되지 않았다면, 이중 인증 재시도
         }
         else //if tracked image tracking state is limited or none
         {
@@ -112,6 +129,27 @@ public class ARTrackedImg : MonoBehaviour
 
         removeInfo.onClick.AddListener(() => removeInfomation(referenceImageName));
 
+    }
+
+    void setVerifi()
+    {
+        if (verifiChk)
+        {
+            //이중 인증 체크가 완료된 상태
+            verifiUI.SetActive(false);
+        }
+        else
+        {
+            //이중 인증 체크가 완료되지 않은 상태
+            verifiUI.SetActive(true);
+            verifiBtn.onClick.AddListener(showPrefabImg);
+        }
+    }
+
+    void showPrefabImg()
+    {
+        verifiUI.SetActive(false); //이중 인증 UI 끄기
+        verifiChk = true; //체크 상태 true로 변경
     }
 
     void removeInfomation(string objname)
