@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class ARTrackedImg : MonoBehaviour
 {
     public ARTrackedImageManager trackedImageManager;
-    public Button removeInfo;
+    public Button removeInfo; //popup yes 버튼
     public GameObject defaultUI; //디폴트 UI
     public GameObject verifiUI; //이중인증 UI
     public Button verifiBtn; //이중인증 확인 버튼

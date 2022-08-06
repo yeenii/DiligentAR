@@ -6,14 +6,16 @@ using UnityEngine.UI;
 
 public class TrashBtn : MonoBehaviour
 {
-    private Button btn;
 
-    public GameObject Popup;
-    public GameObject TargetUI;
+    public GameObject Popup; //PopUpUI
+    public GameObject TargetUI; //Canvas
+    //public GameObject TrashUI; //trash UI
 
-    public Button yesBtn;
-    public Button noBtn;
-
+    void Start()
+    {
+        //Popup.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(YesClick); //yes ë²„íŠ¼
+        //Popup.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(NoClick); // no ë²„íŠ¼
+    }
 
     // Update is called once per frame
     public void BtnClick()
@@ -23,16 +25,16 @@ public class TrashBtn : MonoBehaviour
       
     }
 
-    public void YesClick() //yes ¹öÆ° ´©¸£¸é 
+    public void YesClick()
     {
+        Debug.Log("success");
         Popup.SetActive(false);
-
-        //TargetUI = GameObject.FindGameObjectWithTag("AR");
-        //TargetUI.GetComponent<ARTrackedImg>().placeablePrefabs[0] = null;
-        //TargetUI.SetActive(false);
+        TargetUI.SetActive(false);
+    
     }
 
-    public void NoClick() //no ¹öÆ° ´©¸£¸é 
+
+    public void NoClick() //no ë²„íŠ¼
     {
        
         Popup.SetActive(false);
